@@ -58,6 +58,25 @@
 
   <!-- Spline Viewer -->
   <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
+  
+  <!-- Three.js for 3D Model Rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/loaders/FBXLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/libs/fflate.min.js"></script>
+  
+  <!-- Alternative Three.js loader if the above doesn't work -->
+  <script>
+    // Check if FBXLoader is available, if not, try alternative loading
+    window.addEventListener('load', function() {
+      if (typeof THREE !== 'undefined' && typeof THREE.FBXLoader === 'undefined') {
+        console.log('FBXLoader not found, trying alternative loading...');
+        // Load FBXLoader from alternative source
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/three@0.158.0/examples/js/loaders/FBXLoader.js';
+        document.head.appendChild(script);
+      }
+    });
+  </script>
 
   <style>
     .cursor {
@@ -407,18 +426,17 @@
       <div class="container">
         <!-- hero section -->
         <section class="hero" id="hero">
-          <div class="hero-img"><img src="./assets/grad.png" alt="" /></div>
-
-          <div class="hero-header">
-            <div class="hero-col">
+          <div class="hero-content">
+            <div class="hero-text">
               <h1>JobSync</h1>
-            </div>
-            <div class="hero-col">
               <p id="site-intro">
                 Since 2025, JobSync has been revolutionizing the job search experience, leveraging AI-driven matching,
                 real-time mentorship, and smart career insights to connect job seekers with their ideal opportunities
                 effortlessly.
               </p>
+            </div>
+            <div class="hero-3d-model">
+              <div id="3d-container"></div>
             </div>
           </div>
         </section>
@@ -895,6 +913,7 @@
       <script src="./js/about.js"></script>
       <script src="./js/projects.js"></script>
       <script src="./js/prices.js"></script>
+      <script src="./js/3d-model.js"></script>
 
       <script>
         // Auto-hide flash messages after 5 seconds
